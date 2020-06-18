@@ -1,0 +1,12 @@
+{
+  "commit": {
+    "commit": "7c645cdfbc1cf2271b8b0638a52b1048f2251ae6",
+    "author": "Carl <cboettig@gmail.com>",
+    "time": "2020-06-18 17:33:10",
+    "files": 2,
+    "merge": false,
+    "message": "update wordlist\n"
+  },
+  "remote": "https://github.com/ropensci/RNeXML",
+  "pkg": "RNeXML"
+}
