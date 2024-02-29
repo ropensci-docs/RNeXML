@@ -1,0 +1,12 @@
+{
+  "commit": {
+    "commit": "9f66e55d0dc31f60047491ed38c0754fe323ede8",
+    "author": "Carl <cboettig@gmail.com>",
+    "time": "2023-01-09 20:21:51",
+    "files": 2,
+    "merge": false,
+    "message": "bump version\n"
+  },
+  "repo": "https://github.com/ropensci/RNeXML",
+  "pkg": "RNeXML"
+}
