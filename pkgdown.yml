@@ -1,0 +1,13 @@
+pandoc: 3.8.3
+pkgdown: 2.2.1
+pkgdown_sha: ~
+articles:
+  intro: intro.html
+  metadata: metadata.html
+  S4: S4.html
+  simmap: simmap.html
+  sparql: sparql.html
+last_built: 2026-08-30T07:32Z
+urls:
+  reference: https://docs.ropensci.org/RNeXML/reference
+  article: https://docs.ropensci.org/RNeXML/articles

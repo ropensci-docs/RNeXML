@@ -1,0 +1,89 @@
+# Get character data.frame from nexml
+
+Get character data.frame from nexml
+
+## Usage
+
+``` r
+get_characters(
+  nex,
+  rownames_as_col = FALSE,
+  otu_id = FALSE,
+  otus_id = FALSE,
+  include_state_types = FALSE
+)
+```
+
+## Arguments
+
+- nex:
+
+  a nexml object
+
+- rownames_as_col:
+
+  option to return character matrix rownames (with taxon ids) as it's
+  own column in the data.frame. Default is FALSE for compatibility with
+  geiger and similar packages.
+
+- otu_id:
+
+  logical, default FALSE. return a column with the otu id (for joining
+  with otu metadata, etc)
+
+- otus_id:
+
+  logical, default FALSE. return a column with the otus block id (for
+  joining with otu metadata, etc)
+
+- include_state_types:
+
+  logical, default FALSE. whether to also return a matrix of state types
+  (with values standard, polymorphic, and uncertain)
+
+## Value
+
+the character matrix as a data.frame, or if `include_state_types` is
+TRUE a list of two elements, `characters` as the character matrix, and
+`state_types` as a matrix of state types. Both matrices will be in the
+same ordering of rows and columns.
+
+## Details
+
+RNeXML will attempt to return the matrix using the NeXML taxon (otu)
+labels to name the rows and the NeXML char labels to name the traits
+(columns). If these are unavailable or not unique, the NeXML id values
+for the otus or traits will be used instead.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# A simple example with a discrete and a continous trait
+f <- system.file("examples", "comp_analysis.xml", package="RNeXML")
+nex <- read.nexml(f)
+get_characters(nex)
+
+# A more complex example -- currently ignores sequence-type characters
+f <- system.file("examples", "characters.xml", package="RNeXML")
+nex <- read.nexml(f)
+get_characters(nex)
+
+# if polymorphic or uncertain states need special treatment, request state
+# types to be returned as well:
+f <- system.file("examples", "ontotrace-result.xml", package="RNeXML")
+nex <- read.nexml(f)
+res <- get_characters(nex, include_state_types = TRUE)
+row.has.p <- apply(res$state_types, 1, 
+                   function(x) any(x == "polymorphic", na.rm = TRUE))
+col.has.p <- apply(res$state_types, 2, 
+                   function(x) any(x == "polymorphic", na.rm = TRUE))
+res$characters[row.has.p, col.has.p, drop=FALSE] # polymorphic rows and cols
+res$characters[!row.has.p, drop=FALSE] # drop taxa with polymorphic states
+# replace polymorphic state symbols in matrix with '?'
+m1 <- mapply(function(s, s.t) ifelse(s.t == "standard", s, "?"), 
+             res$characters, res$state_types)
+row.names(m1) <- row.names(res$characters)
+m1
+} # }
+```

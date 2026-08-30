@@ -1,0 +1,5 @@
+# License
+
+    YEAR: 2013 - 2014
+    COPYRIGHT HOLDER: Carl Boettiger
+    ORGANIZATION: rOpenSci

@@ -1,0 +1,13 @@
+{
+  "commit": {
+    "commit": "f94903a24863614c73d4922ea4c4db36261f60e8",
+    "author": "Carl Boettiger <cboettig@gmail.com>",
+    "time": "2024-05-06T19:06:44Z",
+    "files": 1,
+    "merge": false,
+    "message": "Update classes.R"
+  },
+  "repo": "https://github.com/ropensci/RNeXML",
+  "pkg": "RNeXML",
+  "time": "2026-08-30T07:32:48Z"
+}
