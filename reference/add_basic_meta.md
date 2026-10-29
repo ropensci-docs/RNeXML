@@ -1,0 +1,106 @@
+# Add basic metadata
+
+adds Dublin Core metadata elements to (top-level) nexml
+
+## Usage
+
+``` r
+add_basic_meta(
+  title = NULL,
+  description = NULL,
+  creator = Sys.getenv("USER"),
+  pubdate = NULL,
+  rights = "CC0",
+  publisher = NULL,
+  citation = NULL,
+  nexml = new("nexml")
+)
+```
+
+## Arguments
+
+- title:
+
+  A title for the dataset
+
+- description:
+
+  a description of the dataset
+
+- creator:
+
+  name of the data creator. Can be a string or R person object
+
+- pubdate:
+
+  publication date. Default is current date.
+
+- rights:
+
+  the intellectual property rights associated with the data. The default
+  is Creative Commons Zero (CC0) public domain declaration, compatible
+  with all other licenses and appropriate for deposition into the Dryad
+  or figshare repositories. CC0 is also recommended by the Panton
+  Principles. Alternatively, any other plain text string can be added
+  and will be provided as the content attribute to the dc:rights
+  property.
+
+- publisher:
+
+  the publisher of the dataset. Usually where a user may go to find the
+  canonical copy of the dataset: could be a repository, journal, or
+  academic institution.
+
+- citation:
+
+  a citation associated with the data. Usually an academic journal
+  article that indicates how the data should be cited in an academic
+  context. Multiple citations can be included here. citation can be a
+  plain text object, but is preferably an R `citation` or `bibentry`
+  object (which can include multiple citations. See examples
+
+- nexml:
+
+  a nexml object to which metadata should be added. A new nexml object
+  will be created if none exists.
+
+## Value
+
+an updated nexml object
+
+## Details
+
+`add_basic_meta()` is just a wrapper for
+[`add_meta`](https://docs.ropensci.org/RNeXML/reference/add_meta.md) to
+make it easy to provide generic metadata without explicitly providing
+the namespace. For instance,
+`add_basic_meta(title="My title", description="a description")` is
+identical to:
+`add_meta(list(meta("dc:title", "My title"), meta("dc:description", "a description")))`
+Most function arguments are mapped directly to the Dublin Core terms of
+the same name, with the exception of `rights`, which by default maps to
+the Creative Commons namespace when using CC0 license.
+
+## See also
+
+[`add_trees`](https://docs.ropensci.org/RNeXML/reference/add_trees.md)
+[`add_characters`](https://docs.ropensci.org/RNeXML/reference/add_characters.md)
+[`add_meta`](https://docs.ropensci.org/RNeXML/reference/add_meta.md)
+
+## Examples
+
+``` r
+nex <- add_basic_meta(title = "My test title",
+             description = "A description of my test",
+             creator = "Carl Boettiger <cboettig@gmail.com>",
+             publisher = "unpublished data",
+             pubdate = "2012-04-01")
+
+ ## Adding citation to an R package:
+ nexml <- add_basic_meta(citation=citation("ape"))
+if (FALSE) { # \dontrun{
+ ## Use knitcitations package to add a citation by DOI:
+ library(knitcitations)
+ nexml <- add_basic_meta(citation = bib_metadata("10.2307/2408428"))
+ } # }
+```
